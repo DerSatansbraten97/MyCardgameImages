@@ -62,7 +62,7 @@ Schmiede,Gebäude - Taktik,3{FlexCost}{EisenCost},"Einzigartig.
 Turnierplatz,Gebäude - Taktik,2{EisenCost} 2{NahrungCost},"Einzigartig. 
 /
 {Trigger} Immer wenn eine Einheit mit Wert 4 oder weniger die du kontrollierst durch ins Spiel kommen eine {Trigger}-Fähigkeit auslöst, triggert diese ein zusätzliches Mal.",4,4,"Building_Icons/image-removebg-preview (17).png,63,53,77","Screenshot 2026-06-12 181609.png,12,72,134",,,{NahrungCol},,,{EisenCol},{NahrungCol}
-Piratenfestung,Gebäude - Taktik -Küstengebiet,2{HolzCost} 2{NahrungCost},"Einzigartig. 
+Piratenfestung,Gebäude - Taktik - Küstengebiet,2{HolzCost} 2{NahrungCost},"Einzigartig. 
 /
 Kann nur auf Inseln gebaut werden.
 /
