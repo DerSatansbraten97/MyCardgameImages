@@ -1,0 +1,78 @@
+Name,Typbox,Costs,Textbox,Copies,Wert,Spielstein_Icon,Artwork,Spielstein_Icon style,Artwork style,Hexagon_Color style,Costs style,Textbox style,Border_Color style,2Color style
+Vorratsspeicher,Gebäude - Wirtschaft - Rohstoffgebiet,{FlexCost},"{Activated} Lege einen {Rohstoff} des Typs dieses Rohstoffgebiets auf den Vorratsspeicher. 
+/
+{Activated} Zahle einen {Rohstoff} vom Vorratsspeicher in deinen Rohstoffpool.
+/
+{Trigger} Zu Beginn deiner Runde, falls mindestens ein {Rohstoff} auf dem Vorratsspeicher liegt, lege einen weiteren    
+/
+  {Rohstoff} desselben Typs dazu. ",4,1,"Building_Icons/Gemini_Generated_Image_ny9hsyny9hsyny9h-removebg-preview.png,67,51,73","farm-fantasy-backdrop-concept-art-realistic-illustration-background-with-generative-ai-free-photo.jpg,100,100,141",,,{HolzCol},,{fontSize:8px},{GenericCol},
+Hafen,Gebäude - Wirtschaft - Küstengebiet,{FlexCost},Ermöglicht den Bau von Schiffen in diesem Gebiet.,4,1,"Building_Icons/image-removebg-preview (9).png,69,53,66","3f05d621bbe23886b073961f4f29b95d.jpg,80,99,141",,,{HolzCol},,,,
+Werkstatt,Gebäude - Wirtschaft,{HolzCost}{FlexCost},"Du kannst nur eine Werkstatt pro Netzwerk bauen.
+/
++1 Kauf. 
+/
+{Trigger} Immer wenn du ein Gebäude in diesem Netzwerk baust: +1 Karte. ",4,2,"Building_Icons/image-removebg-preview (10).png,73,52,73","village-fantasy-backdrop-concept-art-realistic-illustration-background-with-generative-ai-photo.jpg,64,91,138",,,{HolzCol},,,{HolzCol},
+Laboratorium,Gebäude - Wirtschaft,{SteinCost}{FlexCost},"{Activated} Entferne eine Marke von einem Gebäude oder Gebiet das du kontrollierst: Wähle einen Modus der diese Runde noch nicht gewählt wurde: 
+/
++1 Karte, +1 Angriff, +1 Bewegung, +1 Aktion oder +1 Kauf.",4,2,"Building_Icons/image-removebg-preview (34).png,54,44,61","andrew-baptist-il1501-1-andrewbaptist-1501060-h10-refined.jpg,0,65,140",,,{HolzCol},,,{SteinCol},
+Fabrik,Gebäude - Wirtschaft,{EisenCost}{SteinCost},"{Activated} Zahle 2{Eisen}: Lege eine Produktionsmarke auf diese Fabrik und jede weitere im selben Netzwerk. 
+/
+{Activated} Zahle 2{Stein}, entferne eine Produktionsmarke von dieser Fabrik und jeder im selben Netzwerk: Verstärke für jede auf diese Weise entfernte Marke eine Karte in deinem Ablagestapel.",4,2,"Building_Icons/image-removebg-preview (30).png,73,59,67","326e33bb387c78754fec0158498df269.jpg,0,0,101",,,{HolzCol},,{fontSize:9px},{EisenCol},{SteinCol}
+Markt,Gebäude - Wirtschaft,{FlexCost}{FlexCost}{FlexCost},"+1 Kauf.
+/
+ {Trigger} zu Beginn deiner Runde +1{Geld}.
+/
+Ermöglicht den 2:1 Tausch zwischen {Eisen}, {Holz}, {Nahrung}, {Stein} und {Geld} aus dem Geldpool.",4,3,"Building_Icons/image-removebg-preview (22).png,67,49,71","image.png,0,100,130",,,{HolzCol},,,{GenericCol},
+Bibliothek,Gebäude - Wirtschaft,5{FlexCost},"Einzigartig. 
+/
+Ziehe am Ende deiner Runde eine zusätzliche Karte.",4,5,"Building_Icons/image-removebg-preview (24).png,69,51,68","Gemini_Generated_Image_wc3io3wc3io3wc3i.png,60,84,101",,,{HolzCol},,,{GenericCol},
+Rathaus,Gebäude - Wirtschaft,3{HolzCost} 3{SteinCost},"Einzigartig. 
+/
+{Trigger} In deiner Versorgungsphase erhälst du kumulativ: 
+/
+Bei 2 Gebäuden im selben Netzwerk: +1{Geld}. 
+/
+Bei 3: +1 Kauf. 
+/
+Bei 4: +1 Karte. 
+/
+Bei 5: +{Eisen}/{Holz}/{Nahrung}/{Stein}. 
+/
+Bei 6: lege eine Schildmarke auf ein Gebiet im selben Netzwerk.",4,6,"Building_Icons/Gemini_Generated_Image_5u4i785u4i785u4i-removebg-preview.png,83,51,91","Gemini_Generated_Image_eybsrmeybsrmeybs.png,14,49,134",,{filter:brightness(1.1) contrast(0.9) blur(0.2px)},{HolzCol},,{fontSize:8px},{HolzCol},{SteinCol}
+Stallungen,Gebäude - Taktik,{NahrungCost},"{Trigger}Wenn du die Stallungen baust, lege die Karte Aufsatteln auf deinen Ablagestapel. 
+/
+{Trigger} Immer wenn du das erste Gebiet in deiner Runde eroberst, darfst du 2{Nahrung}bezahlen: Nimm eine Kavallerie-Karte von deinem Ablagestapel auf deine Hand.",4,1,"Building_Icons/image-removebg-preview (32).png,65,59,73","fea2327d1b489796cb6850d613ec64e1.jpg,100,100,101",,,{NahrungCol},,,{NahrungCol},
+Rüstungskammer,Gebäude - Taktik,{EisenCost},"{Trigger} Immer wenn sich eine Einheit in dieses Gebiet bewegt oder dort rekrutiert wird, darfst du {Eisen} bezahlen: Ist es ein Fußsoldat, ersetze den Spielstein durch einen Bogenschützen. Ist es ein Bogenschütze, ersetze den Spielstein durch einen Ritter.",4,1,"Building_Icons/image-removebg-preview (13).png,61,55,57","classes.jpg,64,61,104",,{filter:blur(0.3px)},{NahrungCol},,,{EisenCol},
+Straße,Gebäude - Taktik - Gebietsgrenze,{GeldCost}{FlexCost},"(Kann nur einmal pro Grenze zwischen zwei verbündeten Gebieten gebaut werden. Benötigt kein Gebäudeslot.) 
+/
+Einheiten dürfen sich über eine Straße hinweg ein Gebiet weiter bewegen.",4,2,"Building_Icons/image-removebg-preview (20).png,67,72,88","ba6f6337bee4caa7ba15d8e40402a087.png,91,100,132",,{filter:brightness(1.1) contrast(0.9) blur(0.2px)},{NahrungCol},,,{GenericCol},
+Außenposten,Gebäude - Taktik,{FlexCost}{FlexCost},Du darfst Einheiten in diesem Gebiet rekrutieren.,4,2,"Building_Icons/image-removebg-preview (37) (1).png,58,63,47","Download (6).png,41,62,121",,{filter:brightness(1.3) saturate(1.2)},{NahrungCol},,,{GenericCol},
+Taverne,Gebäude - Taktik - Küstengebiet,{HolzCost}{HolzCost},"{Trigger}  – *Anheuern*: Immer wenn du ein Schiff in diesem Gebiet baust und sich kein verbündetes Schiff in diesem Gebiet befindet, rekrutiere 1 in diesem Gebiet.
+/
+{Trigger}  – *Entdecker*: Immer wenn du mit einem Schiff eine Insel erreichst die neutral oder unbesetzt ist, nimm ein Angespültes Fass vom Shop auf deine Hand.",4,2,"Building_Icons/image-removebg-preview (38).png,59,50,57","Download (8).png,1,100,181",,,{NahrungCol},,{fontSize:8px},{HolzCol},
+Rekrutenhof,Gebäude - Taktik,{NahrungCost}{FlexCost}{FlexCost},"{Trigger} – *Wehrpflicht*: Zu Beginn deiner Runde rekrutiere 1 in diesem Gebiet. 
+/
+{Trigger} – *Kriegsende*: Am Ende deiner Runde, falls du in diesem Zug nicht angegriffen hast, zerstöre einen Fußsoldaten den du kontrollierst.",4,3,"Building_Icons/image-removebg-preview (25).png,61,55,73","c82db02563418248a0de1f26a7d5ecdb.jpg,26,70,104",,,{NahrungCol},,,{NahrungCol},
+Arena,Gebäude - Taktik,{FlexCost}{FlexCost}{FlexCost},Einzigartig. +1 Bewegung. +1 Angriff.,4,3,"Building_Icons/image-removebg-preview (41).png,61,52,57","009671d36411c622e28d9711d72c2d03.jpg,84,100,132",,,{NahrungCol},,,{GenericCol},
+Schmiede,Gebäude - Taktik,3{FlexCost}{EisenCost},"Einzigartig. 
+/
+{Trigger} Immer wenn ein Einheitenspielstein unter deiner Kontrolle ins Spiel kommt, lege eine Rüstungsmarke auf die Schmiede. 
+/
+{Activated}{Unterbrechung} Entferne 2 Rüstungsmarken von der Schmiede: Ein verbündeter Angriffswürfel deiner Wahl erhält +1.",4,4,"Building_Icons/image-removebg-preview (15).png,63,61,68","Download (7).png,63,71,168",,,{NahrungCol},,{fontSize:9px},{EisenCol},
+Turnierplatz,Gebäude - Taktik,2{EisenCost} 2{NahrungCost},"Einzigartig. 
+/
+{Trigger} Immer wenn eine Einheit mit Wert 4 oder weniger die du kontrollierst durch ins Spiel kommen eine {Trigger}-Fähigkeit auslöst, triggert diese ein zusätzliches Mal.",4,4,"Building_Icons/image-removebg-preview (17).png,63,53,77","Screenshot 2026-06-12 181609.png,12,72,134",,,{NahrungCol},,,{EisenCol},{NahrungCol}
+Piratenfestung,Gebäude - Taktik - Küstengebiet,2{HolzCost} 2{NahrungCost},"Einzigartig. 
+/
+Kann nur auf Inseln gebaut werden.
+/
+{Trigger} Zu Beginn deiner Runde, rekrutiere 2 in diesem Gebiet für jede Insel die du vollständig kontrollierst.",4,4,"Building_Icons/image-removebg-preview (14).png,83,68,69","mateusz-ozminski-pirate-s-bay.jpg,69,20,99",,,{NahrungCol},,,{HolzCol},{NahrungCol}
+Gravitationsturm,Gebäude - Taktik,3{EisenCost} 2{HolzCost},"Reichweite 5. 
+/
+{Trigger} Immer wenn du eine Karte verbrennst, darfst du eine gegnerische Einheit innerhalb der Reichweite in ein angrenzendes Gebiet desselben Spielers verschieben. 
+/
+{Activated} (Einmal pro Runde) verbrenne eine Karte: +1{Eisen}.",4,5,"Building_Icons/image-removebg-preview (23).png,57,60,67","Gemini_Generated_Image_a8yawla8yawla8ya.png,31,42,135",,,{NahrungCol},,{fontSize:9px},{EisenCol},{HolzCol}
+Belagerungsturm,Gebäude - Verteidigung,{NahrungCost}{SteinCost},"Reichweite 2.
+/
+{Trigger} Immer wenn du ein Gebäude innerhalb der Reichweite zerstörst, lege zwei Schildmarken auf eines deiner Gebiete.",4,2,"Building_Icons/image-removebg-preview (18).png,65,53,68","Gemini_Generated_Image_o8cq45o8cq45o8cq.png,100,1,128",,,{SteinCol},,,{NahrungCol},{SteinCol}
+Mauer,Gebäude - Verteidigung,{SteinCost}{SteinCost}{SteinCost},"{Trigger} Wenn du die Mauer baust, lege eine Schildmarke auf dieses Gebiet. Du darfst in diesem Gebiet einen zusätzlichen Verteidigungswürfel verwenden.",4,3,"Building_Icons/image-removebg-preview (33).png,0,99,110","Gemini_Generated_Image_lpwuyvlpwuyvlpwu.png,0,81,109",,,{SteinCol},,,{SteinCol},

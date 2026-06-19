@@ -1,0 +1,4 @@
+Name,Typbox,Textbox,Costs,Wert,Copies,Nickname,Border_Color,2Color,Artwork,Artwork style,Costs_Color
+Kupfer,Ressource - Geld,+1{Geld},0,0,24,,,,"Gemini_Generated_Image_k342ikk342ikk342.png,51,37,118",{filter:blur(0.32px)},
+Silber,Ressource - Geld,+2{Geld},{GeldCost}{GeldCost}{GeldCost},3,8,,,,"midjourney_production_of_silver_coins.jpg,0,55,145",{filter:blur(0.3px)},
+Gold,Ressource - Geld,+3{Geld},6{GeldCost},6,6,,,,"ecf915f12c79790731ad8acf6c97b825.jpg,0,0,102",,

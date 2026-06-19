@@ -1,0 +1,17 @@
+Name,Typbox,Textbox,Wert,Copies,Nickname,Border_Color,Border_Color style,2Color,Artwork,Textbox style
+Angespültes Fass,Ressource - Ereignis,"+1 Karte. Würfle einen D6. 
+/
+1: *leeres Fass*. 
+/
+2: +1{Holz}. 
+/
+3: +1{Holz}. +1{Eisen}. 
+/
+4: +1{Holz} +1{Nahrung}. 
+/
+5: +1{Holz} +1{Stein}. 
+/
+6: +1{Holz} +1{Geld}",0,6,,,{HolzCol},,"Gemini_Generated_Image_lr23fllr23fllr23.png,0,100,120",{fontSize:8px}
+Aufsatteln,Aktion - Ereignis,"+1 Karte. +1 Aktion. 
+/
+Reiterspielsteine unter deiner Kontrolle erhalten Bemannung (0/2) bis zum Ende der Runde.",0,3,,,{NahrungCol},,"Artworks/Actions/stefano-travi-ig6.jpg,0,39,137",

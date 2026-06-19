@@ -1,0 +1,5 @@
+Copies,Name,Typbox,Costs,Textbox,Nickname,Border_Color,2Color,Artwork,Costs_Color
+1,Segelschiff,Spielstein - Schiff - Hafen,{FlexCost},"Bemannung 1/3.
+/
+Das Segelschiff kann nicht angreifen.",,,,"stunning-digital-oil-painting-sailing-ship-with-crashing-waves_899449-294796.jpg,0,0,137",
+1,Kriegsschiff,Spielstein - Schiff - Hafen,{FlexCost}{FlexCost},Bemannung 3/6.,,,,"Download (15).png,80,0,140",

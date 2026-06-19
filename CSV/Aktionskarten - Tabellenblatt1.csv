@@ -1,0 +1,57 @@
+Name,Typbox,Costs,Textbox,Wert,Copies,Nickname,Artwork,Artwork style,Border_Color,Border_Color style,Costs style,Textbox style,2Color,2Color style,Costs_Color
+Plan,Aktion - Taktik,{GeldCost},,1,8,,,,,,,,,,
+Zweite Chance,Aktion - Taktik,{GeldCost},"{Unterbrechung} +1 Karte. +1 Aktion.
+/
+ Ein Spieler deiner Wahl darf seinen niedrigsten Würfel erneut würfeln.",1,6,,"mike-heath-resurrection.jpg,0,39,100",{filter:contrast(0.9) blur(0.1px)},,,,,,,
+Taschengeld,Aktion - Wirtschaft,{GeldCost}{GeldCost},+1 Karte. +1{Geld}.,2,6,,"Screenshot 2026-06-13 122138.png,100,100,106",,,,,,,,
+Deckung,Aktion - Taktik,{GeldCost}{GeldCost},"Wenn du angegriffen wirst darfst du Deckung als {Unterbrechung} spielen. 
+/
++1 Karte. Lege eine Schildmarke auf ein verbündetes Gebiet deiner Wahl.",2,6,,"296770-fantasy_art.jpg,26,98,134",,,,,,,,
+Brennende Pfeile,Aktion - Taktik,{EisenCost}{HolzCost},{Unterbrechung} +1 Karte. +1 Kauf. Verbrenne eine Karte auf deinem Ablagestapel. Bis zum Ende der Runde erhalten alle deine Würfelergebnisse außerhalb des Kampfes +1.,2,4,,"Gemini_Generated_Image_tcvll6tcvll6tcvl.png,4,31,124",,,{EisenCol},,,,{HolzCol},
+Lagebesprechung,Aktion - Taktik,{GeldCost}{GeldCost}{GeldCost},"Verbrenne bis zu eine Karte. 
+/
++2 Aktionen. +2 Karten. Wirf dann eine Karte ab.",3,6,,"9ce45d3f0ab3bff69fbbed21c54aaa6e.jpg,0,72",,,,,,,,
+Reiche Ernte,Aktion - Wirtschaft,{GeldCost}{GeldCost}{GeldCost},"+1 Karte. 
+/
+Für jeden unterschiedlichen {Rohstoff} den du diese Runde aus Rohstoffgebieten erhalten hast, erhalte einen zusätzlichen {Rohstoff} des selben Typs.",3,6,,"adam-gryc-harvest.jpg,0,47,122",,,,,,,,
+Entwicklung,Aktion - Taktik,{GeldCost}{GeldCost}{EisenCost},"+1 Karte. 
+/
+Verstärke eine Karte auf deinem Ablagestapel.
+/
+
+/
+*(Verstärken: Verbrenne die gewählte Karte, wähle eine Karte mit Wert +1 aus dem Shop und lege sie auf deinen Ablagestapel)*",3,4,,"wojciech-bajor-medival-technology-waterfall-well-wojciech-bajor-ed-l.jpg,100,23,133",,,{EisenCol},,,,,
+Architekt,Aktion - Wirtschaft,3{GeldCost}{HolzCost},"+1 Karte. +1 Kauf.
+/
+Das nächste Gebäude oder Schiff dass du diese Runde baust kostet 2 beliebige {Rohstoff} weniger.  ",4,5,,"c438bceb58d058a75b43de9f52083df5.jpg,0,100,104",,,{HolzCol},,,,,
+Kaufrausch,Aktion - Wirtschaft,4{GeldCost},+1Karte. +1 Kauf. +2{Geld}.,4,5,,"douglas-deri-03-2-orig-orig.jpg,0,0,120",,,,,,,,
+Sturmwind,Aktion - Zauber,4{GeldCost},+1 Bewegung. +2 Karten,4,5,,"windy-fields-mq.jpg,32,0,136",,,,,,,,
+Katapult,Aktion - Taktik,4{GeldCost},"+1 Karte.
+/
+Wähle ein Gebiet in Reichweite 2. 
+/
+Entferne dort alle Schildmarken und zerstöre ein Gebäude.",4,4,,"for-honor-video-games-concept-art-wallpaper-preview.jpg,26,39,131",,,,{fontSize:18px},,,,
+Industrie,Aktion - Taktik,2{GeldCost}{EisenCost}{SteinCost},"+1 Karte. +1 Aktion. 
+/
+Für jede Marke auf Gebieten oder Gebäuden die du kontrollierst, lege eine zusätzliche Marke auf das Gebiet oder Gebäude",4,4,,"b70a40e5b8e76096ede81ebc1f742386.jpg,52,41,146",,,{EisenCol},{fontSize:18px},,,{SteinCol},
+Baupläne stehlen,Aktion - Taktik,3{GeldCost}{NahrungCost}{SteinCost},"+1 Karte. +1 Aktion. 
+/
+{Trigger} Immer wenn du diese Runde  ein Gebäude zerstörst, darfst du X Schildmarken von deinen Gebieten entfernen, wobei X dem abgerundeten halben Wert des Gebäudes entspricht. Wenn du dies tust, baue das Gebäude in einem Gebiet deiner Wahl ohne dessen Kosten zu zahlen.",4,3,,Download.png,,,{NahrungCol},{fontSize:18px},{fontSize:9px},,{SteinCol},
+Teleport,Aktion - Zauber,5{GeldCost},"{Unterbrechung} +1 Aktion. +1 Karte. 
+/
+Setze eine beliebige Anzahl an Einheiten aus einem verbündeten Gebiet in ein anderes verbündetes Gebiet deiner Wahl.",5,3,,"creadfectus-teleport.jpg,0,0,115",,,,,,,,
+Abwehrplan,Aktion - Taktik,4{GeldCost}2{SteinCost},Baue ein Verteidigungsgebäude mit Wert 3 oder weniger ohne dessen Kosten zu zahlen. Lege eine zusätzliche Schildmarke auf das Gebiet.,6,4,,"Gemini_Generated_Image_q8c4lq8c4lq8c4lq.png,0,8,196",,,{SteinCol},,,,,
+Wiederholung,Aktion - Zauber,6{GeldCost},"+2 Aktionen. +1 Karte. 
+/
+Nimm eine Karte mit Wert 5 oder weniger aus deinem Ablagestapel auf deine Hand.",6,3,,"images.jpeg,0,30,110",,,,,,,,
+Zuvorkommen,Aktion - Zauber,7{GeldCost},"{Unterbrechung} Übernehme die Kontrolle über eine Karte auf dem Stack. Der Besitzer dieser Karte darf eine Karte ziehen und erhält +1 Aktion. Wenn das Ziel dieser Karte eine Einheitenkarte ist, darfst du ihren Spielstein in einem Gebiet deiner Wahl rekrutieren.",7,3,,Gemini_Generated_Image_4bc1vm4bc1vm4bc1.png,,,,,,,,
+Schwarzmarkt,Aktion - Wirtschaft,8{GeldCost},"Jeder Gegner wirft eine Karte aus dessen Hand ab. Für jede Ressourcenkarte die auf diese Weise abgeworfen wurde: +2{Geld}. Für jede andere Karte und jeden besiegten Gegner: 
+/
++1 Karte und +1 Aktion. ",8,3,,"goblin_market__chaos_and_shadows_unveiled_by_inkimagine_dhxilbv-fullview.jpg,59,0,140",,,,,,,,
+Metropole,Aktion - Wirtschaft,5{GeldCost} 2{HolzCost} 2{SteinCost},"Wähle eine Netzwerk das du kontrollierst: 
+/
++1{Geld} für jedes Wirtschaftsgebäude. 
+/
+Rekrutiere 1 für jedes Taktikgebäude. 
+/
++1 Karte für jedes Verteidigungsgebäude.",9,3,,"Download (9).png,0,0,98",,,{HolzCol},{fontSize:14px},,,{SteinCol},
