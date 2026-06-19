@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KERN — Kartenshop</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0e0b07;--surface:#1a1510;--surface2:#241d14;--border:#3a2f1e;
+    --gold:#c9923a;--gold-dim:#7a5520;--gold-glow:#e8b060;
+    --text:#e8dcc8;--text-dim:#8a7a60;--text-muted:#504030;--radius:6px;
+    --col-holz:#8faa5a;--col-eisen:#7a9bb5;--col-nahrung:#c9a83a;
+    --col-stein:#9a8a7a;--col-geld:#c9923a;--col-flex:#a07ab5;
+    --col-atk:#e05a5a;--col-def:#5a9be0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+
+  header{background:linear-gradient(180deg,#1a1208 0%,var(--bg) 100%);border-bottom:1px solid var(--border);padding:.8rem 1.25rem;display:flex;align-items:center;gap:.75rem;position:sticky;top:0;z-index:100;}
+  .logo{font-family:'Cinzel',serif;font-size:1.4rem;font-weight:700;color:var(--gold);letter-spacing:.15em;text-shadow:0 0 20px rgba(201,146,58,.4);flex-shrink:0;}
+  .logo span{color:var(--text-dim);font-weight:400;font-size:.65rem;letter-spacing:.3em;display:block;margin-top:-2px;}
+  .search-wrap{flex:1;max-width:300px;margin-left:auto;position:relative;}
+  .search-wrap input{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:.45rem .9rem .45rem 2rem;color:var(--text);font-family:'Inter',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s;}
+  .search-wrap input:focus{border-color:var(--gold-dim);}
+  .search-wrap input::placeholder{color:var(--text-muted);}
+  .search-icon{position:absolute;left:.6rem;top:50%;transform:translateY(-50%);color:var(--text-muted);pointer-events:none;font-size:.85rem;}
+  .card-count{color:var(--text-dim);font-size:.75rem;white-space:nowrap;}
+
+  .layout{display:grid;grid-template-columns:230px 1fr;min-height:calc(100vh - 54px);}
+
+  aside{background:var(--surface);border-right:1px solid var(--border);padding:.9rem;position:sticky;top:54px;height:calc(100vh - 54px);overflow-y:auto;display:flex;flex-direction:column;gap:.1rem;}
+  aside::-webkit-scrollbar{width:3px;}
+  aside::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+  .filter-section{margin-bottom:.9rem;}
+  .filter-label{font-family:'Cinzel',serif;font-size:.56rem;font-weight:600;color:var(--text-muted);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.4rem;display:block;}
+  .filter-chips{display:flex;flex-wrap:wrap;gap:.25rem;}
+  .chip{padding:.24rem .55rem;border-radius:4px;font-size:.68rem;font-weight:500;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text-dim);transition:all .15s;white-space:nowrap;font-family:'Inter',sans-serif;line-height:1.4;display:flex;align-items:center;gap:.25rem;}
+  .chip:hover{border-color:var(--gold-dim);color:var(--text);}
+  .chip.active{background:var(--gold-dim);border-color:var(--gold);color:var(--gold-glow);}
+  .chip img{width:13px;height:13px;object-fit:contain;vertical-align:middle;}
+
+  .buy-panel{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:.65rem;margin-bottom:.9rem;}
+  .buy-rows{display:flex;flex-direction:column;gap:.3rem;margin-bottom:.45rem;}
+  .buy-row{display:flex;align-items:center;gap:.5rem;}
+  .buy-label{display:flex;align-items:center;gap:.3rem;font-size:.68rem;color:var(--text-dim);width:85px;flex-shrink:0;}
+  .buy-label img{width:16px;height:16px;object-fit:contain;}
+  .stepper{display:flex;align-items:center;border:1px solid var(--border);border-radius:4px;overflow:hidden;flex:1;}
+  .stepper-btn{background:var(--surface);border:none;color:var(--text-dim);font-size:1rem;width:28px;height:26px;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:600;}
+  .stepper-btn:hover{background:var(--gold-dim);color:var(--gold-glow);}
+  .stepper-val{flex:1;background:var(--bg);color:var(--text);font-size:.8rem;font-weight:600;text-align:center;height:26px;line-height:26px;font-family:'Cinzel',serif;}
+  .buy-toggle{width:100%;padding:.35rem;background:var(--gold-dim);border:1px solid var(--gold);border-radius:4px;color:var(--gold-glow);font-size:.7rem;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;text-align:center;}
+  .buy-toggle:hover{background:var(--gold);color:#000;}
+  .buy-toggle.active{background:var(--gold);color:#000;font-weight:600;}
+  .buy-clear{width:100%;padding:.25rem;background:transparent;border:1px solid var(--border);border-radius:4px;color:var(--text-muted);font-size:.65rem;cursor:pointer;font-family:'Inter',sans-serif;margin-top:.3rem;}
+  .buy-clear:hover{border-color:var(--gold-dim);color:var(--text-dim);}
+
+  .reset-btn{width:100%;padding:.4rem;background:transparent;border:1px solid var(--border);border-radius:var(--radius);color:var(--text-muted);font-size:.68rem;cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif;margin-top:auto;}
+  .reset-btn:hover{border-color:var(--gold-dim);color:var(--text-dim);}
+
+  .sort-bar{display:flex;align-items:center;gap:.3rem;padding:.5rem .9rem;border-bottom:1px solid var(--border);background:var(--surface);flex-wrap:wrap;}
+  .sort-label{font-size:.68rem;color:var(--text-muted);}
+  .sort-btn{padding:.24rem .58rem;border-radius:4px;font-size:.68rem;border:1px solid transparent;background:transparent;color:var(--text-dim);cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:.2rem;}
+  .sort-btn:hover{color:var(--text);}
+  .sort-btn.active{border-color:var(--border);background:var(--surface2);color:var(--gold);}
+  .sort-arrow{font-size:.6rem;opacity:.7;}
+
+  main{display:flex;flex-direction:column;}
+  .grid-area{padding:.9rem;flex:1;}
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:.85rem;}
+
+  .card-wrap{perspective:900px;cursor:pointer;height:235px;}
+  .card-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .4s cubic-bezier(.4,0,.2,1);border-radius:var(--radius);}
+  .card-wrap:hover .card-inner,.card-wrap.flipped .card-inner{transform:rotateY(180deg);}
+  .card-front,.card-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:var(--radius);overflow:hidden;}
+  .card-front{border:1px solid var(--border);}
+  .card-back{transform:rotateY(180deg);background:var(--surface);border:1px solid var(--gold-dim);display:flex;flex-direction:column;padding:.65rem;}
+
+  .card-art{width:100%;height:100%;position:relative;}
+  .card-art img.artwork{width:100%;height:100%;object-fit:cover;object-position:top;display:block;border-radius:var(--radius);}
+  .ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2.5rem;opacity:.2;background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);border-radius:var(--radius);}
+
+  /* CARD BACK */
+  .back-name{font-family:'Cinzel',serif;font-size:.7rem;font-weight:700;color:var(--gold);margin-bottom:.15rem;border-bottom:1px solid var(--border);padding-bottom:.28rem;flex-shrink:0;}
+  .back-typeline{font-size:.56rem;color:var(--text-muted);margin-bottom:.35rem;flex-shrink:0;line-height:1.4;}
+  .back-text{font-size:.62rem;color:var(--text-dim);line-height:1.6;flex:1;overflow-y:auto;min-height:0;}
+  .back-text::-webkit-scrollbar{width:2px;}
+  .back-text::-webkit-scrollbar-thumb{background:var(--border);border-radius:1px;}
+  .back-divider{color:var(--border);font-size:.45rem;display:block;text-align:center;margin:.2rem 0;letter-spacing:.05em;}
+  .tok{display:inline-flex;align-items:center;gap:1px;vertical-align:middle;}
+  .tok img{width:13px;height:13px;object-fit:contain;vertical-align:middle;}
+  .back-costs{margin-top:.3rem;padding-top:.28rem;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;gap:3px;flex-shrink:0;}
+  .cost-pill{font-size:.52rem;font-weight:600;padding:1px 5px;border-radius:3px;line-height:1.4;display:inline-flex;align-items:center;gap:3px;}
+  .cost-pill img{width:11px;height:11px;object-fit:contain;}
+  .pill-geld   {background:rgba(201,146,58,.2); color:var(--col-geld);   border:1px solid rgba(201,146,58,.35);}
+  .pill-eisen  {background:rgba(122,155,181,.2);color:var(--col-eisen);  border:1px solid rgba(122,155,181,.35);}
+  .pill-holz   {background:rgba(143,170,90,.2); color:var(--col-holz);   border:1px solid rgba(143,170,90,.35);}
+  .pill-nahrung{background:rgba(201,168,58,.2); color:var(--col-nahrung);border:1px solid rgba(201,168,58,.35);}
+  .pill-stein  {background:rgba(154,138,122,.2);color:var(--col-stein);  border:1px solid rgba(154,138,122,.35);}
+  .pill-flex   {background:rgba(160,122,181,.2);color:var(--col-flex);   border:1px solid rgba(160,122,181,.35);}
+
+  /* Angriff / Abwehr badges */
+  .back-combat{display:flex;gap:.35rem;margin-top:.3rem;padding-top:.28rem;border-top:1px solid var(--border);flex-shrink:0;}
+  .combat-badge{font-size:.58rem;font-weight:600;padding:2px 6px;border-radius:3px;display:flex;align-items:center;gap:3px;}
+  .combat-atk{background:rgba(224,90,90,.15);color:var(--col-atk);border:1px solid rgba(224,90,90,.3);}
+  .combat-def{background:rgba(90,155,224,.15);color:var(--col-def);border:1px solid rgba(90,155,224,.3);}
+
+  .back-footer{display:flex;justify-content:space-between;align-items:center;margin-top:.28rem;padding-top:.28rem;border-top:1px solid var(--border);flex-shrink:0;}
+  .back-wert{font-size:.58rem;color:var(--gold);font-family:'Cinzel',serif;}
+
+  .status{grid-column:1/-1;text-align:center;padding:4rem 2rem;color:var(--text-muted);}
+  .status-icon{font-size:2.5rem;margin-bottom:.8rem;opacity:.25;}
+  .status-text{font-family:'Cinzel',serif;font-size:.82rem;letter-spacing:.1em;}
+  .status small{display:block;margin-top:.5rem;font-family:'Inter',sans-serif;font-size:.7rem;color:var(--text-muted);letter-spacing:0;}
+  .spinner{width:28px;height:28px;border:2px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto .8rem;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  @media(max-width:700px){
+    .layout{grid-template-columns:1fr;}
+    aside{position:static;height:auto;max-height:300px;border-right:none;border-bottom:1px solid var(--border);}
+    .card-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));}
+    .card-wrap{height:195px;}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">KERN<span>Kartenshop</span></div>
+  <div class="search-wrap">
+    <span class="search-icon">⌕</span>
+    <input type="text" id="searchInput" placeholder="Karte suchen…" oninput="applyFilters()">
+  </div>
+  <div class="card-count" id="cardCount">Lädt…</div>
+</header>
+
+<div class="layout">
+<aside>
+  <div class="buy-panel">
+    <span class="filter-label">💰 Was kann ich kaufen?</span>
+    <div class="buy-rows" id="buyRows"></div>
+    <button class="buy-toggle" id="buyToggle" onclick="toggleBuyMode()">Filter aktivieren</button>
+    <button class="buy-clear" onclick="clearBuy()">Zurücksetzen</button>
+  </div>
+  <div class="filter-section">
+    <span class="filter-label">Typ</span>
+    <div class="filter-chips" id="filterTyp"></div>
+  </div>
+  <div class="filter-section">
+    <span class="filter-label">Subtyp</span>
+    <div class="filter-chips" id="filterSubtyp"></div>
+  </div>
+  <div class="filter-section">
+    <span class="filter-label">Gebiet</span>
+    <div class="filter-chips" id="filterGebiet"></div>
+  </div>
+  <div class="filter-section">
+    <span class="filter-label">Spielstein</span>
+    <div class="filter-chips" id="filterSpielstein"></div>
+  </div>
+  <div class="filter-section">
+    <span class="filter-label">Kosten (enthält)</span>
+    <div class="filter-chips" id="filterKosten"></div>
+  </div>
+  <div class="filter-section">
+    <span class="filter-label">Wert</span>
+    <div class="filter-chips" id="filterWert"></div>
+  </div>
+  <button class="reset-btn" onclick="resetAll()">✕ Alle Filter zurücksetzen</button>
+</aside>
+
+<main>
+  <div class="sort-bar">
+    <span class="sort-label">Sortierung:</span>
+    <button class="sort-btn active" data-sort="name"  onclick="setSort(this)"><span>Name</span><span class="sort-arrow" id="arr-name">↑</span></button>
+    <button class="sort-btn"        data-sort="wert"  onclick="setSort(this)"><span>Wert</span><span class="sort-arrow" id="arr-wert"></span></button>
+    <button class="sort-btn"        data-sort="cost"  onclick="setSort(this)"><span>Kosten</span><span class="sort-arrow" id="arr-cost"></span></button>
+    <button class="sort-btn"        data-sort="type"  onclick="setSort(this)"><span>Typ</span><span class="sort-arrow" id="arr-type"></span></button>
+  </div>
+  <div class="grid-area">
+    <div class="card-grid" id="cardGrid">
+      <div class="status"><div class="spinner"></div><div class="status-text">Karten werden geladen…</div></div>
+    </div>
+  </div>
+</main>
+</div>
+
+<script>
+// ── CONFIG ───────────────────────────────────────────────────────────────────
+const BASE = "https://dersatansbraten97.github.io/MyCardgameImages/";
+const ICON_BASE = BASE + "Icons/";
+
+// CSV-Quellen: [url, imageFolder, parser]
+const SOURCES = [
+  { url: BASE + "CSV/Geb%C3%A4udekarten%20-%20Tabellenblatt1.csv",     folder: "Gebäudekarten_Images/",    type: "gebaeude"    },
+  { url: BASE + "CSV/Einheitenkarten%20-%20Tabellenblatt1.csv",         folder: "Einheitenkarten_Images/",  type: "einheit"     },
+  { url: BASE + "CSV/Aktionskarten%20-%20Tabellenblatt1.csv",           folder: "Aktionskarten_Images/",    type: "aktion"      },
+  { url: BASE + "CSV/Ereigniskarten%20-%20Tabellenblatt1.csv",          folder: "Ereigniskarten_Images/",   type: "ereignis"    },
+  { url: BASE + "CSV/Ressourcenkarten%20-%20Tabellenblatt1.csv",        folder: "Ressourcenkarten_Images/", type: "ressource"   },
+  { url: BASE + "CSV/Spielsteine%20-%20Tabellenblatt1.csv",             folder: "Spielsteine_Images/",      type: "spielstein"  },
+];
+
+function iconUrl(token) { return ICON_BASE + encodeURIComponent('{' + token + '}') + '.png'; }
+function iconImg(token, size=13) {
+  return `<img src="${iconUrl(token)}" width="${size}" height="${size}" style="object-fit:contain;vertical-align:middle" alt="${token}">`;
+}
+
+const COST_DEF = {
+  GeldCost:    {label:"Geld",    cls:"pill-geld",    res:"geld"},
+  EisenCost:   {label:"Eisen",   cls:"pill-eisen",   res:"eisen"},
+  HolzCost:    {label:"Holz",    cls:"pill-holz",    res:"holz"},
+  NahrungCost: {label:"Nahrung", cls:"pill-nahrung", res:"nahrung"},
+  SteinCost:   {label:"Stein",   cls:"pill-stein",   res:"stein"},
+  FlexCost:    {label:"Flex",    cls:"pill-flex",    res:"flex"},
+};
+
+const BUY_RES = [
+  {id:"geld",    label:"Geld",    token:"Geld"},
+  {id:"holz",    label:"Holz",    token:"Holz"},
+  {id:"eisen",   label:"Eisen",   token:"Eisen"},
+  {id:"nahrung", label:"Nahrung", token:"Nahrung"},
+  {id:"stein",   label:"Stein",   token:"Stein"},
+];
+
+const TEXT_TOKENS = [
+  "Activated","Trigger","Unterbrechung","Rohstoff",
+  "Geld","Eisen","Holz","Nahrung","Stein","Flex",
+  "GeldCost","EisenCost","HolzCost","NahrungCost","SteinCost","FlexCost",
+];
+
+// ── STATE ────────────────────────────────────────────────────────────────────
+let ALL_CARDS      = [];
+let activeTyp      = new Set();
+let activeSubtyp   = new Set();
+let activeGebiet   = new Set();
+let activeSpielstein = new Set();
+let activeKosten   = new Set();
+let activeWert     = new Set();
+let currentSort    = "name";
+let sortAsc        = true;
+let buyModeActive  = false;
+const buyVals      = {geld:0,holz:0,eisen:0,nahrung:0,stein:0};
+
+// ── BOOT ─────────────────────────────────────────────────────────────────────
+window.onload = () => { buildBuyRows(); loadAll(); };
+
+// ── BUY STEPPER ──────────────────────────────────────────────────────────────
+function buildBuyRows() {
+  document.getElementById('buyRows').innerHTML = BUY_RES.map(r => `
+    <div class="buy-row">
+      <div class="buy-label">${iconImg(r.token,16)}<span>${r.label}</span></div>
+      <div class="stepper">
+        <button class="stepper-btn" onclick="stepBuy('${r.id}',-1)">−</button>
+        <div class="stepper-val" id="buyval-${r.id}">0</div>
+        <button class="stepper-btn" onclick="stepBuy('${r.id}',1)">+</button>
+      </div>
+    </div>`).join('');
+}
+function stepBuy(id, d) {
+  buyVals[id] = Math.max(0, (buyVals[id]||0) + d);
+  document.getElementById('buyval-'+id).textContent = buyVals[id];
+  if(buyModeActive) applyFilters();
+}
+function clearBuy() {
+  BUY_RES.forEach(r => { buyVals[r.id]=0; const e=document.getElementById('buyval-'+r.id); if(e)e.textContent='0'; });
+  if(buyModeActive){ buyModeActive=false; syncBuyBtn(); }
+  applyFilters();
+}
+function syncBuyBtn(){
+  const b=document.getElementById('buyToggle');
+  b.classList.toggle('active',buyModeActive);
+  b.textContent=buyModeActive?'Filter aktiv ✓':'Filter aktivieren';
+}
+function toggleBuyMode(){ buyModeActive=!buyModeActive; syncBuyBtn(); applyFilters(); }
+
+// ── CSV PARSING ───────────────────────────────────────────────────────────────
+function parseCSVLine(line) {
+  const res=[]; let cur='',inQ=false;
+  for(let i=0;i<line.length;i++){
+    const c=line[i];
+    if(c==='"'){if(inQ&&line[i+1]==='"'){cur+='"';i++;}else inQ=!inQ;}
+    else if(c===','&&!inQ){res.push(cur);cur='';}
+    else cur+=c;
+  }
+  res.push(cur); return res;
+}
+function splitCSVRows(text) {
+  const rows=[]; let cur='',inQ=false;
+  for(let i=0;i<text.length;i++){
+    const c=text[i];
+    if(c==='"'){if(inQ&&text[i+1]==='"'){cur+='"';i++;}else inQ=!inQ;cur+=c;}
+    else if((c==='\r'||c==='\n')&&!inQ){if(c==='\r'&&text[i+1]==='\n')i++;if(cur.trim())rows.push(cur);cur='';}
+    else cur+=c;
+  }
+  if(cur.trim())rows.push(cur);
+  return rows;
+}
+
+// Extrahiert Kostenliste aus einem Rohstring wie "{GeldCost}{GeldCost}" oder "3{FlexCost}"
+function parseCosts(raw) {
+  if(!raw) return [];
+  const costs = []; const mp = new Set(); let m;
+  const mre = /(\d+)\{(\w+Cost)\}/g;
+  while((m=mre.exec(raw))!==null){
+    for(let n=0;n<parseInt(m[1]);n++) costs.push(m[2]);
+    for(let p=m.index;p<m.index+m[0].length;p++) mp.add(p);
+  }
+  const sre = /\{(\w+Cost)\}/g;
+  while((m=sre.exec(raw))!==null){ if(!mp.has(m.index)) costs.push(m[1]); }
+  return costs;
+}
+
+// Normalisiert den Spielstein-Namen: entfernt führende Zahlen und Plural-s
+// "1 Fußsoldat" → "Fußsoldat", "2 Fußsoldaten" → "Fußsoldat"
+function normalizeSpielstein(raw) {
+  if(!raw) return '';
+  // Zahl am Anfang entfernen
+  let s = raw.replace(/^\d+\s*/, '').trim();
+  // Plural-"en" / "en" am Ende entfernen wenn Singular erkennbar kürzer ist
+  // Strategie: wenn endet auf "en", prüfe ob ohne "en" auch ein valides Wort ist
+  // Einfache Heuristik: entferne abschließendes "en" → "Fußsoldaten" → "Fußsoldat"
+  if(s.endsWith('en') && s.length > 4) {
+    s = s.slice(0, -2);
+  }
+  return s;
+}
+
+// Artwork-Dateiname aus dem Artwork-Feld extrahieren (Format: "dateiname.png,x,y,z")
+function parseArtwork(raw) {
+  if(!raw) return '';
+  return raw.split(',')[0].trim();
+}
+
+function parseCSV(text, srcType, folder) {
+  const rows = splitCSVRows(text);
+  if(rows.length < 2) return [];
+  const h = parseCSVLine(rows[0]).map(x=>x.replace(/^"|"$/g,'').trim());
+  const col = n => h.indexOf(n);
+
+  // Gemeinsame Spalten
+  const iName = col('Name');
+  const iTyp  = col('Typbox');
+  const iText = col('Textbox');
+  const iWert = col('Wert');
+
+  // Typ-spezifische Spalten
+  const iCosts = col('Costs') >= 0 ? col('Costs') : col('Kosten');  // Einheiten nutzen "Kosten"
+  const iArt   = col('Artwork');
+  const iAtk   = col('Angriffskraft');
+  const iDef   = col('Abwehrkraft');
+
+  return rows.slice(1).map(row => {
+    const r = parseCSVLine(row).map(v=>v.replace(/^"|"$/g,'').trim());
+    const name = r[iName]||''; if(!name) return null;
+
+    const rawText  = iText >= 0 ? (r[iText]||'').replace(/\r/g,'') : '';
+    const rawCosts = iCosts >= 0 ? (r[iCosts]||'') : '';
+    const costs    = parseCosts(rawCosts);
+    const wert     = parseFloat(iWert >= 0 ? r[iWert] : '') || 0;
+    const artFile  = iArt >= 0 ? parseArtwork(r[iArt]) : '';
+    const artSrc   = artFile ? BASE + folder + encodeURIComponent(artFile) : '';
+
+    // Typzeile aufsplitten
+    const tp = (r[iTyp]||'').split(' - ').map(p=>p.trim()).filter(Boolean);
+    const typ    = tp[0]||'';
+    const subtyp = tp[1]||'';
+    const gebiet = tp[2]||'';
+
+    // Spielstein: aus gebiet-Segment normalisieren (3. Segment in Typbox bei Einheiten)
+    const spielstein = gebiet ? normalizeSpielstein(gebiet) : '';
+
+    // Kampfwerte (nur Einheiten)
+    const atk = iAtk >= 0 ? (parseFloat(r[iAtk]) || null) : null;
+    const def = iDef >= 0 ? (parseFloat(r[iDef]) || null) : null;
+
+    return {
+      name, typ, subtyp, gebiet, spielstein,
+      costs, rawText, wert, artSrc,
+      atk, def,
+      srcType,
+      purchasable: srcType !== 'ereignis',  // Ereigniskarten nicht kaufbar
+    };
+  }).filter(Boolean);
+}
+
+// ── LOAD ALL CSVs ─────────────────────────────────────────────────────────────
+async function loadAll() {
+  try {
+    const results = await Promise.all(
+      SOURCES.map(async s => {
+        const res = await fetch(s.url);
+        if(!res.ok) throw new Error(`${s.url}: HTTP ${res.status}`);
+        return parseCSV(await res.text(), s.type, s.folder);
+      })
+    );
+    ALL_CARDS = results.flat();
+    if(!ALL_CARDS.length) throw new Error("Keine Karten gefunden");
+    buildFilters();
+    applyFilters();
+  } catch(e) {
+    document.getElementById('cardGrid').innerHTML =
+      `<div class="status"><div class="status-icon">⚠️</div><div class="status-text">Laden fehlgeschlagen<small>${e.message}</small></div></div>`;
+    document.getElementById('cardCount').textContent = 'Fehler';
+  }
+}
+
+// ── AFFORD ────────────────────────────────────────────────────────────────────
+function canAfford(card) {
+  let g=buyVals.geld,h=buyVals.holz,e=buyVals.eisen,n=buyVals.nahrung,s=buyVals.stein;
+  for(const k of card.costs){
+    if(k==='GeldCost')    {if(--g<0)return false;}
+    else if(k==='HolzCost')    {if(--h<0)return false;}
+    else if(k==='EisenCost')   {if(--e<0)return false;}
+    else if(k==='NahrungCost') {if(--n<0)return false;}
+    else if(k==='SteinCost')   {if(--s<0)return false;}
+  }
+  return (h+e+n+s) >= card.costs.filter(k=>k==='FlexCost').length;
+}
+
+// ── FILTERS ───────────────────────────────────────────────────────────────────
+function buildFilters() {
+  const uniq = arr => [...new Set(arr.filter(Boolean))].sort((a,b)=>a.localeCompare(b,'de'));
+
+  buildChips('filterTyp',    uniq(ALL_CARDS.map(c=>c.typ)),         activeTyp,       applyFilters);
+  buildChips('filterSubtyp', uniq(ALL_CARDS.map(c=>c.subtyp)),      activeSubtyp,    applyFilters);
+  buildChips('filterGebiet', uniq(ALL_CARDS.map(c=>c.gebiet).filter(g=>g && !/^\d/.test(g))), activeGebiet, applyFilters);
+
+  // Spielstein-Filter: nur Werte die aus Einheits-Typbox kommen (haben Zahl im Original)
+  const spielsteine = uniq(
+    ALL_CARDS
+      .filter(c => c.spielstein && c.gebiet && /^\d/.test(c.gebiet))
+      .map(c => c.spielstein)
+  );
+  buildChips('filterSpielstein', spielsteine, activeSpielstein, applyFilters);
+
+  // Kosten-Filter mit Icon
+  const usedCosts = [...new Set(ALL_CARDS.flatMap(c=>c.costs))].filter(k=>COST_DEF[k]);
+  const cf = document.getElementById('filterKosten'); cf.innerHTML='';
+  usedCosts.sort().forEach(k => {
+    const info = COST_DEF[k];
+    const b = document.createElement('button'); b.className='chip'; b.dataset.key=k;
+    b.innerHTML = `${iconImg(k,13)}<span>${info.label}</span>`;
+    b.onclick = () => toggleF(b, activeKosten, k, applyFilters);
+    cf.appendChild(b);
+  });
+
+  const werts = [...new Set(ALL_CARDS.map(c=>c.wert).filter(v=>v>0))].sort((a,b)=>a-b);
+  const wf = document.getElementById('filterWert'); wf.innerHTML='';
+  werts.forEach(w => { const b=mkChip(`★ ${w}`); b.dataset.key=w; b.onclick=()=>toggleF(b,activeWert,w,applyFilters); wf.appendChild(b); });
+}
+
+function buildChips(id, vals, set, cb){
+  const el=document.getElementById(id); el.innerHTML='';
+  vals.forEach(v=>{ const b=mkChip(v); b.dataset.key=v; b.onclick=()=>toggleF(b,set,v,cb); el.appendChild(b); });
+}
+function mkChip(l){ const b=document.createElement('button'); b.className='chip'; b.textContent=l; return b; }
+function toggleF(btn,set,val,cb){ set.has(val)?(set.delete(val),btn.classList.remove('active')):(set.add(val),btn.classList.add('active')); cb(); }
+
+function resetAll(){
+  activeTyp.clear();activeSubtyp.clear();activeGebiet.clear();
+  activeSpielstein.clear();activeKosten.clear();activeWert.clear();
+  document.querySelectorAll('.chip').forEach(b=>b.classList.remove('active'));
+  document.getElementById('searchInput').value='';
+  clearBuy();
+}
+
+// ── SORT ─────────────────────────────────────────────────────────────────────
+function setSort(btn){
+  const key=btn.dataset.sort;
+  if(currentSort===key){ sortAsc=!sortAsc; } else { currentSort=key; sortAsc=true; }
+  document.querySelectorAll('.sort-btn').forEach(b=>{ b.classList.remove('active'); const a=document.getElementById('arr-'+b.dataset.sort); if(a)a.textContent=''; });
+  btn.classList.add('active');
+  const a=document.getElementById('arr-'+key); if(a) a.textContent=sortAsc?'↑':'↓';
+  applyFilters();
+}
+
+// ── SEARCH ────────────────────────────────────────────────────────────────────
+function searchMatch(card,q){
+  if(!q)return true; const ql=q.toLowerCase();
+  if(card.name.toLowerCase().includes(ql))return true;
+  if(card.rawText.toLowerCase().replace(/[{}]/g,'').includes(ql))return true;
+  return false;
+}
+
+// ── APPLY ─────────────────────────────────────────────────────────────────────
+function applyFilters(){
+  const q = document.getElementById('searchInput').value.trim();
+  let filtered = ALL_CARDS.filter(c => {
+    if(!searchMatch(c,q)) return false;
+    if(activeTyp.size       && !activeTyp.has(c.typ))        return false;
+    if(activeSubtyp.size    && !activeSubtyp.has(c.subtyp))  return false;
+    // Gebiet-Filter: nur auf Karten anwenden die kein Spielstein-Gebiet haben
+    if(activeGebiet.size    && !activeGebiet.has(c.gebiet))  return false;
+    // Spielstein-Filter: prüfe ob normalisierter Spielstein-Name übereinstimmt
+    if(activeSpielstein.size && !activeSpielstein.has(c.spielstein)) return false;
+    if(activeKosten.size    && ![...activeKosten].some(k=>c.costs.includes(k))) return false;
+    if(activeWert.size      && !activeWert.has(c.wert))      return false;
+    // "Was kann ich kaufen?" schließt Ereigniskarten und kostenlose Karten aus
+    if(buyModeActive) {
+      if(!c.purchasable) return false;
+      if(!canAfford(c))  return false;
+    }
+    return true;
+  });
+
+  const dir = sortAsc ? 1 : -1;
+  filtered.sort((a,b) => {
+    if(currentSort==='name') return dir*a.name.localeCompare(b.name,'de');
+    if(currentSort==='wert') return dir*(a.wert-b.wert);
+    if(currentSort==='cost') return dir*(a.costs.length-b.costs.length);
+    if(currentSort==='type') return dir*(a.typ.localeCompare(b.typ,'de')||a.subtyp.localeCompare(b.subtyp,'de'));
+    return 0;
+  });
+
+  document.getElementById('cardCount').textContent = `${filtered.length} / ${ALL_CARDS.length} Karten`;
+  renderGrid(filtered);
+}
+
+// ── FORMAT TEXT ───────────────────────────────────────────────────────────────
+function formatText(raw) {
+  return raw
+    .replace(/\s*\n\/\n\s*/g,'<span class="back-divider">───────</span>')
+    .replace(/\s*\/\n\s*/g,'<span class="back-divider">───────</span>')
+    .replace(/\n/g,' ')
+    .replace(/\{(\w+)\}/g, (_, tok) => {
+      if(TEXT_TOKENS.includes(tok)) return `<span class="tok">${iconImg(tok,13)}</span>`;
+      return `<span style="color:var(--text-muted);font-size:.55rem">{${tok}}</span>`;
+    });
+}
+
+// ── RENDER ────────────────────────────────────────────────────────────────────
+function typeEmoji(typ, sub) {
+  if(sub==='Verteidigung') return '🛡️';
+  if(sub==='Taktik')       return '⚔️';
+  if(sub==='Wirtschaft')   return '🏪';
+  if(typ==='Gebäude')      return '🏰';
+  if(typ==='Einheit')      return '🪖';
+  if(typ==='Aktion')       return '🃏';
+  if(typ==='Ressource')    return '💎';
+  if(typ==='Spielstein')   return '♟️';
+  return '📜';
+}
+
+function renderGrid(cards){
+  const grid = document.getElementById('cardGrid');
+  if(!cards.length){
+    grid.innerHTML='<div class="status"><div class="status-icon">🃏</div><div class="status-text">Keine Karten gefunden</div></div>';
+    return;
+  }
+
+  grid.innerHTML = cards.map(card => {
+    // Kosten-Pills
+    const pills = card.costs.map(k => {
+      const i = COST_DEF[k] || {label:k, cls:'pill-flex'};
+      return `<span class="cost-pill ${i.cls}">${iconImg(k,11)} ${i.label}</span>`;
+    }).join('');
+
+    const fullType = [card.typ, card.subtyp, card.gebiet].filter(Boolean).join(' — ');
+
+    // Kampfwerte (Angriff / Abwehr) — nur wenn vorhanden
+    const combatHTML = (card.atk !== null || card.def !== null) ? `
+      <div class="back-combat">
+        ${card.atk !== null ? `<span class="combat-badge combat-atk">⚔ ${card.atk}</span>` : ''}
+        ${card.def !== null ? `<span class="combat-badge combat-def">🛡 ${card.def}</span>` : ''}
+      </div>` : '';
+
+    return `
+    <div class="card-wrap" onclick="this.classList.toggle('flipped')">
+      <div class="card-inner">
+        <div class="card-front">
+          <div class="card-art">
+            ${card.artSrc
+              ? `<img class="artwork" src="${card.artSrc}" alt="${card.name}"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                 <div class="ph" style="display:none">${typeEmoji(card.typ,card.subtyp)}</div>`
+              : `<div class="ph">${typeEmoji(card.typ,card.subtyp)}</div>`
+            }
+          </div>
+        </div>
+        <div class="card-back">
+          <div class="back-name">${card.name}</div>
+          <div class="back-typeline">${fullType}</div>
+          <div class="back-text">${formatText(card.rawText)}</div>
+          ${combatHTML}
+          ${pills ? `<div class="back-costs">${pills}</div>` : ''}
+          <div class="back-footer">
+            ${card.wert ? `<div class="back-wert">★ Wert ${card.wert}</div>` : '<span></span>'}
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+</script>
+</body>
+</html>
