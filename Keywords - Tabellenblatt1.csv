@@ -1,0 +1,20 @@
+Keyword,Infotext
+Verbrennen,Entferne die referenzierte Karte aus dem Spiel (Lege sie zurück in den Shop).
+Verstärken,"Verbrenne eine Karte mit Wert X aus deinem Ablagestapel. Nimm eine Karte desselben Typs mit Wert X+1 aus dem Shop und lege sie auf deinen Ablagestapel.
+
+- Ist keine passende Karte im Shop verfügbar, wird trotzdem verbrannt – die verstärkte Karte entfällt"
+Schildmarke,"Eine spezielle Marke auf einem Gebiet.
+- Wenn eine Einheit in diesem Gebiet Schaden erhalten würde: 1 Schildmarke wird entfernt stattdessen
+- Die Einheit erhält keinen Schaden"
+Netzwerk,"Das aktive Gebiet und alle Gebiete die transitiv über Straßen mit diesem Gebiet verbunden sind gehören zum Netzwerk.
+"
+Bemannung,Bemannung (Min/Max) ist ein Keyword auf Schiffen und bestimmten Einheiten. Es gibt an wie viele Angriffskraft an Einheiten an Bord sein darf. Min: Das Schiff kann sich nur bewegen wenn die Angriffskraft der aufgesetzten Einheiten mindestens dem Mindestwert entspricht. Max: Die Angriffskraft der aufgesetzten Einheiten darf den Maximalwert nicht überschreiten.
+Reichweite,"Die maximale Anzahl an Gebietsgrenzen zwischen einem referenzierten Gebiet oder Gebäude und einem Ziel-Gebiet.
+
+- Ein Gebiet ist „innerhalb der Reichweite"" wenn es in maximal X Schritten über angrenzende Gebiete oder Meere erreichbar ist
+- Alle Gebiete zählen als Schritte – unabhängig von Besitz (verbündet, neutral, feindlich) und Gebietstyp.
+- Beispiel: Reichweite 2 in Gebiet D (Reihe A–B–C–D–E–F–G): C und E sind in Reichweite (1 Schritt), B und F ebenfalls (2 Schritte). A und G nicht.
+"
+Einzigartig,Kann maximal einmal pro Spieler besessen werden. Details in Kapitel 9.
+Rekrutieren,"Eine EINHEIT ins Spiel bringen.
+- „Rekrutiere X“ bedeutet: Bringe X Fußsoldat-Spielsteine ins Spiel. "
